@@ -1,5 +1,6 @@
 package com.tarefas.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,12 +37,19 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public Task markTaskAsCompleted(@PathVariable Long id) {
-        return repository.findById(id).map(task -> {
-            task.setCompleted(true);
-            return repository.save(task);
-        }).orElse(null);
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
+        return repository.findById(id)
+                .map(task -> {
+                    task.setName(updatedTask.getName());
+                    task.setDescription(updatedTask.getDescription());
+                    task.setDate(updatedTask.getDate());
+                    task.setTime(updatedTask.getTime());
+                    return ResponseEntity.ok(repository.save(task));
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
+
+
 
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {

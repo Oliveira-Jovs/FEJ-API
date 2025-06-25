@@ -10,40 +10,61 @@ import jakarta.persistence.Id;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private String title;
-    private boolean completed = false;
+    private String name;
+    private String description;
+    private String date;
+    private String time;
 
-    public Task() {}
-
-    public Task(String title) {
-        this.title = title;
-        this.completed = false;
+    public Task() {
     }
 
-    public Long getId() {
+    public Task(String name, String description, String date, String time) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.time = time;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getName() {
+        return name;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
 }
